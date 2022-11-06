@@ -37,6 +37,4 @@ public class SocketManager {
     public static void addBleSocketHm(String adress, BluetoothSocket bluetoothSocket) {
         mBleSocketHm.put(adress, bluetoothSocket);
     }
-
-
 }

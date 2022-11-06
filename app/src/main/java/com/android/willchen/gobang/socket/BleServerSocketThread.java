@@ -1,12 +1,12 @@
 package com.android.willchen.gobang.socket;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.android.willchen.gobang.config.ConfigData;
@@ -53,23 +53,18 @@ public class BleServerSocketThread extends Thread {
                 mBleConnectActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        AlertDialog aDialog = new AlertDialog.Builder(mBleConnectActivity)
-                                .setTitle("消息")
-                                .setMessage("是否接受挑战?")
-                                .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        isAccept = true;
-                                        Toast.makeText(mBleConnectActivity, "连接成功!", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .setNegativeButton("否", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        isAccept = false;
-                                    }
-                                })
-                                .show();
+                        AlertDialog aDialog = new AlertDialog.Builder(mBleConnectActivity).setTitle("消息").setMessage("是否接受挑战?").setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                isAccept = true;
+                                Toast.makeText(mBleConnectActivity, "连接成功!", Toast.LENGTH_SHORT).show();
+                            }
+                        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                isAccept = false;
+                            }
+                        }).show();
                     }
                 });
                 while (true) {

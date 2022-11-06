@@ -2,6 +2,7 @@ package com.android.willchen.gobang.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -10,16 +11,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.willchen.gobang.R;
 import com.android.willchen.gobang.adapter.BluetoothDevicesAdapter;
@@ -63,8 +64,7 @@ public class BleConnectActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_bleconnect);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         ButterKnife.inject(this);
@@ -132,18 +132,13 @@ public class BleConnectActivity extends Activity {
                 method.invoke(device);
             } else if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
                 mThisSocket = device.createRfcommSocketToServiceRecord(ConfigData.UUID);
-                AlertDialog dialog = new AlertDialog.Builder(BleConnectActivity.this)
-                        .setTitle("发起挑战")
-                        .setMessage("确认挑战玩家: " + mBluetooths.get(position).getName())
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                mBleSocketThread = new BleSocketThread(mBluetoothAdapter, mThisSocket, mActivity, mAdress);
-                                mBleSocketThread.start();
-                            }
-                        })
-                        .setNegativeButton("取消", null)
-                        .show();
+                AlertDialog dialog = new AlertDialog.Builder(BleConnectActivity.this).setTitle("发起挑战").setMessage("确认挑战玩家: " + mBluetooths.get(position).getName()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mBleSocketThread = new BleSocketThread(mBluetoothAdapter, mThisSocket, mActivity, mAdress);
+                        mBleSocketThread.start();
+                    }
+                }).setNegativeButton("取消", null).show();
 
             }
         } catch (Exception e) {
@@ -223,13 +218,11 @@ public class BleConnectActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
-        if(mBleServerSocketThread!=null){
+        if (mBleServerSocketThread != null) {
             mBleServerSocketThread.cancel();
         }
-        if(mBleSocketThread!=null){
+        if (mBleSocketThread != null) {
             mBleSocketThread.cancel();
         }
     }
-
-
 }

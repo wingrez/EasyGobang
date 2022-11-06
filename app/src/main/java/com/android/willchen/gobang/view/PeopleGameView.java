@@ -4,12 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.willchen.gobang.ui.BleGameActivity;
 
@@ -223,43 +224,22 @@ public class PeopleGameView extends View {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
                 int side = chess[i][j];
-                if (side == 0)
-                    continue;
+                if (side == 0) continue;
                 for (int k = 0; k < 5; k++) {
                     //check from vertical
-                    if ((i - k >= 0 && i + 4 - k < 15) &&
-                            (chess[i - k][j] == side &&
-                                    chess[i + 1 - k][j] == side &&
-                                    chess[i + 2 - k][j] == side &&
-                                    chess[i + 3 - k][j] == side &&
-                                    chess[i + 4 - k][j] == side)) {
+                    if ((i - k >= 0 && i + 4 - k < 15) && (chess[i - k][j] == side && chess[i + 1 - k][j] == side && chess[i + 2 - k][j] == side && chess[i + 3 - k][j] == side && chess[i + 4 - k][j] == side)) {
                         return side;
                     }
                     //check from horizontal
-                    if ((j - k >= 0 && j + 4 - k < 15) &&
-                            (chess[i][j - k] == side &&
-                                    chess[i][j + 1 - k] == side &&
-                                    chess[i][j + 2 - k] == side &&
-                                    chess[i][j + 3 - k] == side &&
-                                    chess[i][j + 4 - k] == side)) {
+                    if ((j - k >= 0 && j + 4 - k < 15) && (chess[i][j - k] == side && chess[i][j + 1 - k] == side && chess[i][j + 2 - k] == side && chess[i][j + 3 - k] == side && chess[i][j + 4 - k] == side)) {
                         return side;
                     }
                     //check from leftbevel
-                    if ((i - k >= 0 && j - k >= 0 && i + 4 - k < 15 && j + 4 - k < 15) &&
-                            (chess[i - k][j - k] == side &&
-                                    chess[i + 1 - k][j + 1 - k] == side &&
-                                    chess[i + 2 - k][j + 2 - k] == side &&
-                                    chess[i + 3 - k][j + 3 - k] == side &&
-                                    chess[i + 4 - k][j + 4 - k] == side)) {
+                    if ((i - k >= 0 && j - k >= 0 && i + 4 - k < 15 && j + 4 - k < 15) && (chess[i - k][j - k] == side && chess[i + 1 - k][j + 1 - k] == side && chess[i + 2 - k][j + 2 - k] == side && chess[i + 3 - k][j + 3 - k] == side && chess[i + 4 - k][j + 4 - k] == side)) {
                         return side;
                     }
                     //check from rightbevel
-                    if ((i - k >= 0 && j + k < 15 && i + 4 - k < 15 && j - 4 + k >= 0) &&
-                            (chess[i - k][j + k] == side &&
-                                    chess[i + 1 - k][j - 1 + k] == side &&
-                                    chess[i + 2 - k][j - 2 + k] == side &&
-                                    chess[i + 3 - k][j - 3 + k] == side &&
-                                    chess[i + 4 - k][j - 4 + k] == side)) {
+                    if ((i - k >= 0 && j + k < 15 && i + 4 - k < 15 && j - 4 + k >= 0) && (chess[i - k][j + k] == side && chess[i + 1 - k][j - 1 + k] == side && chess[i + 2 - k][j - 2 + k] == side && chess[i + 3 - k][j - 3 + k] == side && chess[i + 4 - k][j - 4 + k] == side)) {
                         return side;
                     }
 

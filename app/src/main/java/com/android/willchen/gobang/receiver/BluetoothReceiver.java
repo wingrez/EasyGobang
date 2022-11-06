@@ -57,6 +57,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
 
     public interface OnReceiverListener {
         void setBluetoothList(List<Bluetooth> bluetooths, List<BluetoothDevice> devices);
+
         void showText();
     }
 }

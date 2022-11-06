@@ -10,14 +10,22 @@ import java.util.List;
  */
 public interface IAi {
 
-	BestPos action(int chess[][],int depth);
-	int getLine(int i,int j,int dir,int relapos,int chess[][]);
-	int evaluate(int chess[][]);
-	int max(int chess[][],int deep,int alpha,int beta);
-	int min(int chess[][],int deep,int alpha,int beta);
-	int pointValue(int chess[][],int i,int j,int side);
-	boolean hasNeighbor(int chess[][],int i ,int j,int d);
-	int isWin(int chess[][]);
-	List<BestPos> generate(int chess[][],int deep);
+    BestPos action(int chess[][], int depth);
+
+    int getLine(int i, int j, int dir, int relapos, int chess[][]);
+
+    int evaluate(int chess[][]);
+
+    int max(int chess[][], int deep, int alpha, int beta);
+
+    int min(int chess[][], int deep, int alpha, int beta);
+
+    int pointValue(int chess[][], int i, int j, int side);
+
+    boolean hasNeighbor(int chess[][], int i, int j, int d);
+
+    int isWin(int chess[][]);
+
+    List<BestPos> generate(int chess[][], int deep);
 
 }
